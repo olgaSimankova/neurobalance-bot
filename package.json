@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/olgaSimankova/neurobalanceBot#readme",
   "dependencies": {
+    "mongodb": "^6.5.0",
     "node-telegram-bot-api": "^0.65.1",
     "nodemon": "^3.1.0"
   }

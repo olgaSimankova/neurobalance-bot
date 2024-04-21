@@ -3,6 +3,21 @@ const { yesNoOprions } = require("./options");
 
 const BOT_API_KEY = "7013811695:AAFUCfMiI61SImrDupalnCmergtanN2vO6Y";
 
+const { MongoClient } = require("mongodb");
+
+// Connection URL
+const url =
+  "mongodb+srv://botAdmin:Pjb3Ufm8JxLtaHIh@neurocluster.im5xylk.mongodb.net/";
+const client = new MongoClient(url);
+
+client.connect();
+console.log("Connected successfully to server");
+
+const dbName = "botDB";
+
+const db = client.db(dbName);
+const collection = db.collection("users");
+
 const bot = new TelegramApi(BOT_API_KEY, { polling: true });
 
 const chats = {};
@@ -38,6 +53,10 @@ const start = () => {
     console.log(msg);
 
     bot.sendMessage(chatId, `Ты ответил ${data}. Ты точно уверен?`);
+    collection.insertOne({
+      id: msg.from.id,
+    });
+    bot.sendMessage(chatId, "Я тебя добавил в БД :)");
   });
 };
 
